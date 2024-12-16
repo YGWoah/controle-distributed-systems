@@ -4,7 +4,7 @@ import {
   useState,
   useEffect,
 } from 'react';
-import keycloakService from '@app/services/keycloak';
+import keycloakService from '@app/services/keycloack';
 
 type AuthContextType = {
   isAuthenticated: boolean;

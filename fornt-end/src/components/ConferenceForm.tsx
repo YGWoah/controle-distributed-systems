@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Conference } from '../types';
+import { conferenceApi } from '@app/api';
 
 const ConferenceForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -38,7 +39,16 @@ const ConferenceForm: React.FC = () => {
     e.preventDefault();
     // Here you would typically send the data to your API
     console.log('Submitting conference:', conference);
-    navigate('/conferences');
+
+    conferenceApi
+      .post('/api/conferences', conference)
+      .then((response) => {
+        console.log(response.data);
+        navigate('/conferences');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleChange = (

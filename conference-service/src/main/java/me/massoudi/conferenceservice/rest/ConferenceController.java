@@ -32,6 +32,8 @@ public class ConferenceController {
     @PostMapping
     public ConferenceDTO createConference(@RequestBody ConferenceDTO conferenceDTO) {
         Conference conference = ConferenceMapper.INSTANCE.toEntity(conferenceDTO);
+        conference.setId(null);
+        System.out.println(conference);
         return ConferenceMapper.INSTANCE.toDTO(conferenceService.save(conference));
     }
 

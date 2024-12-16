@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -10,8 +10,11 @@ import ConferenceList from './components/ConferenceList';
 import ConferenceForm from './components/ConferenceForm';
 import KeynoteList from './components/KeyNoteList';
 import KeynoteForm from './components/KeyNoteForm';
+import { useAuth } from './contexts/KeyCloakAuthContext.tsx';
 
 const App: React.FC = () => {
+  let { isAuthenticated, logout } = useAuth();
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-100">
@@ -26,19 +29,40 @@ const App: React.FC = () => {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/conferences"
-                  className="hover:text-gray-300"
-                >
-                  Conferences
-                </Link>
-              </li>
-              <li>
-                <Link to="/keynotes" className="hover:text-gray-300">
-                  Keynotes
-                </Link>
-              </li>
+              {isAuthenticated ? (
+                <>
+                  <li>
+                    <Link
+                      to="/conferences"
+                      className="hover:text-gray-300"
+                    >
+                      Conferences
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/keynotes"
+                      className="hover:text-gray-300"
+                    >
+                      Keynotes
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={logout}
+                      className="hover:text-gray-300"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <Link to="/login" className="hover:text-gray-300">
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
@@ -60,6 +84,7 @@ const App: React.FC = () => {
               path="/keynotes/:id/edit"
               element={<KeynoteForm />}
             />
+            <Route path="/login" element={<div>Login Page</div>} />
           </Routes>
         </main>
       </div>

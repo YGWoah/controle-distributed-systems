@@ -20,9 +20,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.cors(Customizer.withDefaults()).sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).csrf(csrf -> csrf.disable()).headers(h -> h.frameOptions(fo -> fo.disable())).authorizeHttpRequests(ar -> ar.requestMatchers("/h2-console/**", "api/public", "swagger-ui/**","v3/api-docs/**",
+        return http.cors(Customizer.withDefaults()).sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).csrf(csrf -> csrf.disable()).headers(h -> h.frameOptions(fo -> fo.disable())).authorizeHttpRequests(ar -> ar.requestMatchers("/h2-console/**", "api/public", "swagger-ui/**","v3/api-docs/**"
                         // this is for testing
-                        "api/**"
+//                        "api/**"
 
                         ).permitAll())
                 //.authorizeHttpRequests(ar->ar.requestMatchers("/api/products/**").hasAuthority("ADMIN"))
