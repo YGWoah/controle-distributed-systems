@@ -6,7 +6,7 @@ services:
     ports:
       - "8761:8761"
     networks:
-      - survey-network
+      - conference-network
 
   config-server:
     image: config-server
@@ -14,7 +14,7 @@ services:
     ports:
       - "8088:8088"
     networks:
-      - survey-network
+      - conference-network
     depends_on:
       - eureka-server
     environment:
@@ -26,7 +26,7 @@ services:
     ports:
       - "8089:8089"
     networks:
-      - survey-network
+      - conference-network
     depends_on:
       - config-server
     environment:
@@ -39,7 +39,7 @@ services:
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
     networks:
-      - survey-network
+      - conference-network
     ports:
       - "5432:5432"
 
@@ -65,7 +65,7 @@ services:
     depends_on:
       - postgres
     networks:
-      - survey-network
+      - conference-network
 networks:
-  survey-network:
+  conference-network:
     driver: bridge

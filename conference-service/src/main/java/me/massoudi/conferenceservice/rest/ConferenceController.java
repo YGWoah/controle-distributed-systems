@@ -19,16 +19,14 @@ public class ConferenceController {
 
     @GetMapping
     public List<ConferenceDTO> getAllConferences() {
-        return conferenceService.findAll().stream()
-                .map(ConferenceMapper.INSTANCE::toDTO)
-                .collect(Collectors.toList());
+        List<Conference> conferences = conferenceService.findAll();
+        System.out.println(conferences);
+        return conferences.stream().map(ConferenceMapper.INSTANCE::toDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public ConferenceDTO getConferenceById(@PathVariable Long id) {
-        return conferenceService.findById(id)
-                .map(ConferenceMapper.INSTANCE::toDTO)
-                .orElse(null);
+        return conferenceService.findById(id).map(ConferenceMapper.INSTANCE::toDTO).orElse(null);
     }
 
     @PostMapping

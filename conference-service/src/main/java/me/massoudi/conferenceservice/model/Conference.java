@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ public class Conference {
     private Long id;
     private String title;
     private String type;
-    private LocalDate date;
+    private Date date;
     private int duration;
     private int numberOfAttendees;
     private double score;
